@@ -55,7 +55,8 @@ class HomePage extends StatelessWidget{
                   color: Theme.of(context).colorScheme.primary,
                   onPressed: () {
                     if (_task == null || _task == "") return; //don't add a null task
-                    _databaseService.addTask(_task!);
+                    // _databaseService.addTask(_task!);
+                    _databaseService.createCategory(_task!,'this is the description',1);
                     //setState(() {
                       _task = null;
                     //});

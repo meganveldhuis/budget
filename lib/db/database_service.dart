@@ -99,11 +99,11 @@ class DatabaseService {
   Future<Database> getDatabase() async{
     print("initializing database");
     // final databaseDirPath = await getDatabasesPath();
-    String databasePath = join(await getDatabasesPath(), "budget_db.db"); //name of the db
+    String databasePath = join(await getDatabasesPath(), "budget.db"); //name of the db
     await deleteDatabase(databasePath);
     final database = await openDatabase(
       databasePath,
-      version: 2,
+      version: 3,
       onCreate: (Database db, int version) async{
         await db.execute(tableExpenses);
         await db.execute(tableIncome);
@@ -118,11 +118,8 @@ class DatabaseService {
 
 
   Future<List>? getTasks() async{
-    print("TEST");
     final db = await database;
     final data = await db.query('expenses');
-    print("data here:");
-    print(data);
     return List.empty();
   }
 
@@ -144,6 +141,35 @@ class DatabaseService {
     print(data);
     String path = await getDatabasesPath();
     print(path);
-    
+  }
+
+  void createCategory(String name, String description, int isIncome ) async{
+    //note that while is_income is a bool, we need to add it to the database as an integer.
+    print("Creating Category");
+    final db = await database;
+    int intIsIncome=0;
+
+    // if (isIncome){
+    //   intIsIncome = 1;
+    // }else if(!isIncome){
+    //   intIsIncome = 0;
+    // }else{
+    //   intIsIncome = 99; //error
+    //   print("ERROR: bool value not found");
+    // }
+    await db.insert(
+      'categories',{
+        'name': name,
+        'description': description,
+        'is_income': isIncome,
+      }
+    );
+    print("added a category");
+    List data = await db.query('categories');
+    print(data);
+    data = await db.query('expenses');
+    print(data);
+    String path = await getDatabasesPath();
+    print(path);
   }
 }
