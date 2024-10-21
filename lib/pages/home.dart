@@ -1,15 +1,15 @@
 // import 'package:provider/provider.dart';
 // import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-import '../db/database_service.dart';
+import '../db/budget_database.dart';
 
-import '../ui/donut_chart.dart';
-import '../my_app_state.dart';
+import '../widget/dialogs/donutChart.dart';
+// import '../my_app_state.dart';
 
 class HomePage extends StatelessWidget{
-  final DatabaseService _databaseService = DatabaseService.instance;
-
+  
+  final budgetDatabase _databaseService = budgetDatabase.instance;
+  // const HomePage({Key? key, required this.title}) : super(key: key);
   String? _task = null;
 
   HomePage({super.key});
@@ -20,7 +20,25 @@ class HomePage extends StatelessWidget{
     return 
     // ExpDonutChart();
       Scaffold (
-        body: ExpDonutChart(),
+        body: Column(
+          children: [
+            ExpDonutChart(),
+            GestureDetector(
+                onTap: () {
+                  _databaseService.printCategories();
+                },
+                child: Container(
+                  width: 300,
+                  height: 30,
+                  color: const Color.fromARGB(255, 68, 68, 198),
+                  child: const Center(
+                      child: Text(
+                    "Print category data",
+                    style: TextStyle(color: Colors.white),
+                  )),
+            ))
+          ],
+        ),
         floatingActionButton: _addTaskButton(context),
           // const Center(
           //   child: 
@@ -81,15 +99,5 @@ class HomePage extends StatelessWidget{
       ),
     );
   }
-
-  // Widget addEntryButton() {
-  //   return FloatingActionButton(
-  //     onPressed: (){
-  //       _databaseService.getTasks();
-  //       // print(_databaseService);
-  //     }
-      
-  //   );
-  // }
 }
 

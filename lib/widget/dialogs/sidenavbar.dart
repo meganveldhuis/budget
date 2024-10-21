@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../pages/entry.dart';
-import '../pages/settings.dart';
-import '../pages/home.dart';
+// import '../../pages/entry.dart';
+import '../../pages/settings.dart';
+import '../../pages/home.dart';
+// import '../../pages/expenses.dart';
 
 
 class SideNavBar extends StatefulWidget{
@@ -19,13 +20,10 @@ class _MyHomePageState extends State<SideNavBar> { //underscore at beginning of 
     switch (selectedIndex) {
       case 0:
         page = HomePage();
-        break;
       case 1:
         page = SettingsPage();
-        break;
-      case 2:
-        page = EntryPage();
-        break;
+      // case 2:
+        // page = ExpensesPage();
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }

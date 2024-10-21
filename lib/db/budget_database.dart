@@ -4,10 +4,10 @@ import 'package:sqflite/sqflite.dart';
 // database stored at: 
 // C:\Users\megan\AppData\Local\Google\AndroidStudio2024.1\device-explorer\Pixel 8 API VanillaIceCream\_\data\user\0\com.example.budgetapp\databases
 
-class DatabaseService {
+class budgetDatabase {
   static Database? _db;
 
-  static final DatabaseService instance = DatabaseService._constructor(); 
+  static final budgetDatabase instance = budgetDatabase._constructor(); 
 
   // final String _expTableName = "expenses";
 
@@ -78,18 +78,8 @@ class DatabaseService {
     );
   """;
 
-  // static const tableTasks = """
-  //   CREATE TABLE IF NOT EXISTS tasks(
 
-  //   );
-  // """;
-
-  // final String _tasksTableName = "tasks";
-  // final String _tasksIdColumnName = "id";
-  // final String _tasksContentColumnName = "content";
-  // final String _tasksStatusColumnName = "status";
-
-  DatabaseService._constructor();
+  budgetDatabase._constructor();
 
   Future<Database> get database async {
     if (_db != null) return _db!;
@@ -98,12 +88,12 @@ class DatabaseService {
   }
   Future<Database> getDatabase() async{
     print("initializing database");
-    // final databaseDirPath = await getDatabasesPath();
-    String databasePath = join(await getDatabasesPath(), "budget.db"); //name of the db
-    await deleteDatabase(databasePath);
+    String databasePath = join(await getDatabasesPath(), "budget_db1.db"); //name of the db
+    // await deleteDatabase(databasePath);
+    print(databasePath);
     final database = await openDatabase(
       databasePath,
-      version: 3,
+      version: 2,
       onCreate: (Database db, int version) async{
         await db.execute(tableExpenses);
         await db.execute(tableIncome);
@@ -111,17 +101,12 @@ class DatabaseService {
         await db.execute(tableCategories);
         await db.execute(tableCurrency);
         await db.execute(tableTrips);
+        print("oncreate");
       }
     );
     return database;
   }
 
-
-  Future<List>? getTasks() async{
-    final db = await database;
-    final data = await db.query('expenses');
-    return List.empty();
-  }
 
   void addTask(
     String content,
@@ -172,4 +157,11 @@ class DatabaseService {
     String path = await getDatabasesPath();
     print(path);
   }
+
+  void printCategories() async {
+    final db = await database;
+    List data = await db.query('categories');
+    print(data);
+  }
 }
+

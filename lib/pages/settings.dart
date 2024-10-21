@@ -5,6 +5,8 @@ import '../my_app_state.dart';
 
 
 class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
@@ -15,6 +17,20 @@ class SettingsPage extends StatelessWidget {
       );
     }
 
+    return pageLayout(appState: appState);
+  }
+}
+
+class pageLayout extends StatelessWidget {
+  const pageLayout({
+    super.key,
+    required this.appState,
+  });
+
+  final MyAppState appState;
+
+  @override
+  Widget build(BuildContext context) {
     return ListView(
       children: [
         Padding(

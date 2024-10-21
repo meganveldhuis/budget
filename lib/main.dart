@@ -1,33 +1,51 @@
 // import 'package:english_words/english_words.dart';
-import '../my_app_state.dart';
+//import 'package:budgetapp/pages/first_page.dart';
+//import 'package:budgetapp/pages/home.dart';
+
+//import '../my_app_state.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart'; //for .watch
-import 'db/database_service.dart';
+// import 'package:provider/provider.dart'; //for .watch
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'db/budget_database.dart';
 
 //import pages:
-import 'ui/sidenavbar.dart';
+import 'widget/dialogs/sidenavbar.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyApp(budgetDB: budgetDatabase.instance));
 }
-
-
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-  final DatabaseService _databaseService = DatabaseService.instance;
+  const MyApp({Key? key, required budgetDatabase budgetDB})
+    : _budgetDB = budgetDB,
+      super(key: key);
+  // budgetDatabase budgetDB.instance;
+
+  final budgetDatabase _budgetDB;
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
+    return RepositoryProvider.value(
+      value: _budgetDB,
       child: MaterialApp(
         title: 'Budget App',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(227, 138, 168, 1)),
+          primarySwatch: Colors.amber,
         ),
         home: SideNavBar(),
-      ),
+      )
     );
   }
 }
+    // MaterialApp(
+    //     title: 'Budget App',
+    //     theme: ThemeData(
+    //       useMaterial3: true,
+    //       primarySwatch: Colors.amber,
+    //     ),
+    //     home: 
+    //       RepositoryProvider(
+    //         create: (context) => 
+    //       )
+        
+    // );
