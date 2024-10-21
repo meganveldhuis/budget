@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 class ExpDonutChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-  List<ExpensesPieDataClass> pieData = [
-    ExpensesPieDataClass('Groceries', 250),
-    ExpensesPieDataClass('Shopping', 38),
-    ExpensesPieDataClass('Rent', 34),
-    ExpensesPieDataClass('Others', 52)
-  ];
+  // List<ExpensesPieDataClass> pieData = [
+  //   ExpensesPieDataClass('Groceries', 250),
+  //   ExpensesPieDataClass('Shopping', 38),
+  //   ExpensesPieDataClass('Rent', 34),
+  //   ExpensesPieDataClass('Others', 52)
+  // ];
 
       return Center(
         child:SfCircularChart(

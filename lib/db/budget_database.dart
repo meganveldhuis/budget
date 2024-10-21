@@ -132,7 +132,7 @@ class budgetDatabase {
     //note that while is_income is a bool, we need to add it to the database as an integer.
     print("Creating Category");
     final db = await database;
-    int intIsIncome=0;
+    // int intIsIncome=0;
 
     // if (isIncome){
     //   intIsIncome = 1;

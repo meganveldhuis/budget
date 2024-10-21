@@ -5,8 +5,8 @@
  * BLOCS:
  *    - YearDropdownOptionsBloc
  *    - MonthDropdownOptionsBloc
- *    - CategoryOptionsBloc <expenses>
- *    - UpdateExpenseTableBloc
+ *    - CategoryOptionsBloc <income>
+ *    - UpdateInbcomeTableBloc
  * 
  * CUBITS:
 */
@@ -15,5 +15,5 @@
 // YearDropdown
 // MonthDropdown
 // CategoryDropdown
-// ExpensesTable
+// IncomeTable
 

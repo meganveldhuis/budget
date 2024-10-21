@@ -2,6 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../my_app_state.dart';
+/* 
+ * BLOCS:
+ *    - newCategoryBtnPressed
+ * 
+ * CUBITS:
+ *    - 
+*/
+
+// newCategoryName
+// newCategoryIncomeOrExpense (two options)
+// newCategorySubmitBtn
+
+// delete category?
+
+// defCurrencyDropdown (only option is CAD rn)
+
+// add trips later
+
+// add data import / export later
 
 
 class SettingsPage extends StatelessWidget {

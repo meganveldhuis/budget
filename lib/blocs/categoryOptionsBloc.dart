@@ -1,0 +1,1 @@
+//takes input 0 for expense, 1 for income

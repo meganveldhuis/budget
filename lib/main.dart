@@ -1,6 +1,5 @@
-// import 'package:english_words/english_words.dart';
-//import 'package:budgetapp/pages/first_page.dart';
-//import 'package:budgetapp/pages/home.dart';
+//note: adding budget, currencies, and data import/export LATER
+// trips to do last
 
 //import '../my_app_state.dart';
 import 'package:flutter/material.dart';
