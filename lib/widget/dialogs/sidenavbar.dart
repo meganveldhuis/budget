@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // import '../../pages/entry.dart';
 import '../../pages/settings.dart';
 import '../../pages/home.dart';
-// import '../../pages/expenses.dart';
+import '../../pages/expenses.dart';
 
 
 class SideNavBar extends StatefulWidget{
@@ -22,8 +23,10 @@ class _MyHomePageState extends State<SideNavBar> { //underscore at beginning of 
         page = HomePage();
       case 1:
         page = SettingsPage();
-      // case 2:
-        // page = ExpensesPage();
+      case 2:
+        page = BlocProvider<ExpensePageBloc>(
+                    create: (_) => ExpensePageBloc(),
+                    child: ExpensesPage());
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }

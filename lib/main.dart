@@ -11,15 +11,15 @@ import 'db/budget_database.dart';
 import 'widget/dialogs/sidenavbar.dart';
 
 void main() {
-  runApp(MyApp(budgetDB: budgetDatabase.instance));
+  runApp(MyApp(budgetDB: BudgetDatabase.instance));
 }
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key, required budgetDatabase budgetDB})
+  const MyApp({Key? key, required BudgetDatabase budgetDB})
     : _budgetDB = budgetDB,
       super(key: key);
   // budgetDatabase budgetDB.instance;
 
-  final budgetDatabase _budgetDB;
+  final BudgetDatabase _budgetDB;
 
   @override
   Widget build(BuildContext context) {

@@ -4,10 +4,10 @@ import 'package:sqflite/sqflite.dart';
 // database stored at: 
 // C:\Users\megan\AppData\Local\Google\AndroidStudio2024.1\device-explorer\Pixel 8 API VanillaIceCream\_\data\user\0\com.example.budgetapp\databases
 
-class budgetDatabase {
+class BudgetDatabase {
   static Database? _db;
 
-  static final budgetDatabase instance = budgetDatabase._constructor(); 
+  static final BudgetDatabase instance = BudgetDatabase._constructor(); 
 
   // final String _expTableName = "expenses";
 
@@ -79,7 +79,7 @@ class budgetDatabase {
   """;
 
 
-  budgetDatabase._constructor();
+  BudgetDatabase._constructor();
 
   Future<Database> get database async {
     if (_db != null) return _db!;
@@ -163,5 +163,28 @@ class budgetDatabase {
     List data = await db.query('categories');
     print(data);
   }
-}
 
+
+
+
+  Future<List> categoryOptions(Enum valueType) async {
+    String isIncome = '0';
+    List<Object> isIncomeList;
+    switch(valueType.name){
+      case 'expense':
+        isIncome = '0';
+        break;
+      case 'income':
+        isIncome = '1';
+        break;
+    };
+    isIncomeList = [isIncome];
+    final db = await database;
+    List categories = await db.query(
+                                'categories',
+                                where: '? == is_income',
+                                whereArgs: isIncomeList
+                              );
+    return categories;
+  }
+}

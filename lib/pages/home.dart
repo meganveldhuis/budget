@@ -8,7 +8,7 @@ import '../widget/dialogs/donutChart.dart';
 
 class HomePage extends StatelessWidget{
   
-  final budgetDatabase _databaseService = budgetDatabase.instance;
+  final BudgetDatabase _databaseService = BudgetDatabase.instance;
   // const HomePage({Key? key, required this.title}) : super(key: key);
   String? _task = null;
 
