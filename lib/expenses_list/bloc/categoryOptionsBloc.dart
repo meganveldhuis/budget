@@ -1,7 +1,7 @@
 //takes input 0 for expense, 1 for income
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqflite/sqflite.dart';
-import '../db/budget_database.dart';
+import '../../db/budget_database.dart';
 
 // umm need init for page so that the dropdown knows what options to show
 

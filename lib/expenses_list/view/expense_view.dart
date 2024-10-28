@@ -20,7 +20,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/expensePageBloc.dart';
+import '../bloc/expensePageBloc.dart';
 
 class ExpensesPage extends StatelessWidget{
   ExpensesPage({super.key});
@@ -39,7 +39,5 @@ class ExpensesPage extends StatelessWidget{
         ),
       )
     )
-    
-    
   }
 }

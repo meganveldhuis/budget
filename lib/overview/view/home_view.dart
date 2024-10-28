@@ -1,9 +1,9 @@
 // import 'package:provider/provider.dart';
 // import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import '../db/budget_database.dart';
+import '../../db/budget_database.dart';
 
-import '../widget/dialogs/donutChart.dart';
+import '../widgets/donutChart.dart';
 // import '../my_app_state.dart';
 
 class HomePage extends StatelessWidget{

@@ -1,14 +1,11 @@
 //note: adding budget, currencies, and data import/export LATER
 // trips to do last
 
-//import '../my_app_state.dart';
 import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart'; //for .watch
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'db/budget_database.dart';
 
-//import pages:
-import 'widget/dialogs/sidenavbar.dart';
+import 'sidenavbar.dart';
 
 void main() {
   runApp(MyApp(budgetDB: BudgetDatabase.instance));
