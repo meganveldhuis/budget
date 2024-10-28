@@ -1,12 +1,10 @@
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sqflite/sqflite.dart';
-import '../../db/budget_database.dart';
+import '../../db/budgetDatabase.dart';
 
-import '../../models/expenseItem.dart';
+// import '../../models/expenseItem.dart';
 
-part 'expense_event.dart';
-part 'expense_state.dart';
+part 'expenseEvent.dart';
+part 'expenseState.dart';
 
 enum Dropdown {expense, income, budget}
 

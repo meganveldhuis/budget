@@ -11,17 +11,17 @@
 
 import 'dart:ffi';
 
-class expenseItem {
+class ExpenseItem {
   String date;
   String timestamp;
   String name;
-  int cat_id;
-  int trip_id;
+  int categoryID;
+  int tripID;
   Float amount;
-  int currency_id;
+  int currencyID;
 
-  expenseItem({required this.date, required this.timestamp, 
-              required this.name, required this.cat_id,
-              required this.trip_id, required this.amount,
-              required this.currency_id});
+  ExpenseItem({required this.date, required this.timestamp, 
+              required this.name, required this.categoryID,
+              required this.tripID, required this.amount,
+              required this.currencyID});
 }

@@ -2,6 +2,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../models/expenseItem.dart';
+import '../models/incomeItem.dart';
 
 // database stored at: 
 // C:\Users\megan\AppData\Local\Google\AndroidStudio2024.1\device-explorer\Pixel 8 API VanillaIceCream\_\data\user\0\com.example.budgetapp\databases
@@ -108,7 +109,7 @@ class BudgetDatabase {
   }
 
 //---------------------------------//  EXPENSES  //---------------------------------//
-  void addExpense(expenseItem newEntry) async {
+  void addExpense(ExpenseItem newEntry) async {
     final db = await database;
 
     await db.insert(
@@ -117,16 +118,30 @@ class BudgetDatabase {
         'date': newEntry.date,
         'timestamp':DateTime.now(),
         'name': newEntry.name,
-        'cat_id': newEntry.cat_id,
-        'trip_id': newEntry.trip_id,
+        'cat_id': newEntry.categoryID,
+        'trip_id': newEntry.tripID,
         'amount': newEntry.amount,
-        'currency_id': newEntry.currency_id
+        'currency_id': newEntry.currencyID
       },
     );
   }
 
 //---------------------------------//  INCOME  //---------------------------------//
+  void addIncome(IncomeItem newEntry) async{
+    final db = await database;
 
+    await db.insert(
+      'income',
+      {
+        'date': newEntry.date,
+        'timestamp':DateTime.now(),
+        'note': newEntry.note,
+        'cat_id': newEntry.categoryID,
+        'amount': newEntry.amount,
+        'currency_id': newEntry.currencyID
+      },
+    );
+  }
 
 //---------------------------------//  CATEGORIES  //---------------------------------//
   void createCategory(String name, String description, int isIncome ) async{

@@ -1,11 +1,11 @@
-import 'package:budgetapp/expenses_list/bloc/expensePageBloc.dart';
+import 'package:budgetapp/expensesList/bloc/expensePageBloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // import '../../pages/entry.dart';
 import 'settings/view/settings_view.dart';
-import 'overview/view/home_view.dart';
-import 'expenses_list/view/expense_view.dart';
+import 'overview/view/homeView.dart';
+import 'expensesList/view/expenseView.dart';
 
 
 class SideNavBar extends StatefulWidget{
