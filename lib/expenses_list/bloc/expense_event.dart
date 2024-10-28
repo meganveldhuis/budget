@@ -15,9 +15,11 @@ class InitExpensePage extends ExpenseEvent{
   const InitExpensePage();  
 }
 
-// class CategoryDropdownPressed extends ExpenseEvent{
-//   //inputs?
-// }
+class CategoryDropdownPressed extends ExpenseEvent{
+  final String chosenCategory;
+  const CategoryDropdownPressed(this.chosenCategory);
+  //inputs?
+}
 
 // class DateDropdownPressed extends ExpenseEvent{
 //   //inputs?

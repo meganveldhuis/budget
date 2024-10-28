@@ -1,6 +1,8 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../models/expenseItem.dart';
+
 // database stored at: 
 // C:\Users\megan\AppData\Local\Google\AndroidStudio2024.1\device-explorer\Pixel 8 API VanillaIceCream\_\data\user\0\com.example.budgetapp\databases
 
@@ -8,8 +10,6 @@ class BudgetDatabase {
   static Database? _db;
 
   static final BudgetDatabase instance = BudgetDatabase._constructor(); 
-
-  // final String _expTableName = "expenses";
 
   static const tableExpenses = """
     CREATE TABLE IF NOT EXISTS expenses(
@@ -107,41 +107,30 @@ class BudgetDatabase {
     return database;
   }
 
-
-  void addTask(
-    String content,
-  ) async {
+//---------------------------------//  EXPENSES  //---------------------------------//
+  void addExpense(expenseItem newEntry) async {
     final db = await database;
-    List data = await db.query('expenses');
-    print("adding to this db:");
-    print(data);
+
     await db.insert(
       'expenses',
       {
-        'date': content,
-        'amount': 0,
+        'date': newEntry.date,
+        'timestamp':DateTime.now(),
+        'name': newEntry.name,
+        'cat_id': newEntry.cat_id,
+        'trip_id': newEntry.trip_id,
+        'amount': newEntry.amount,
+        'currency_id': newEntry.currency_id
       },
     );
-    data = await db.query('expenses');
-    print(data);
-    String path = await getDatabasesPath();
-    print(path);
   }
 
-  void createCategory(String name, String description, int isIncome ) async{
-    //note that while is_income is a bool, we need to add it to the database as an integer.
-    print("Creating Category");
-    final db = await database;
-    // int intIsIncome=0;
+//---------------------------------//  INCOME  //---------------------------------//
 
-    // if (isIncome){
-    //   intIsIncome = 1;
-    // }else if(!isIncome){
-    //   intIsIncome = 0;
-    // }else{
-    //   intIsIncome = 99; //error
-    //   print("ERROR: bool value not found");
-    // }
+
+//---------------------------------//  CATEGORIES  //---------------------------------//
+  void createCategory(String name, String description, int isIncome ) async{
+    final db = await database;
     await db.insert(
       'categories',{
         'name': name,
@@ -149,13 +138,6 @@ class BudgetDatabase {
         'is_income': isIncome,
       }
     );
-    print("added a category");
-    List data = await db.query('categories');
-    print(data);
-    data = await db.query('expenses');
-    print(data);
-    String path = await getDatabasesPath();
-    print(path);
   }
 
   void printCategories() async {
@@ -164,10 +146,8 @@ class BudgetDatabase {
     print(data);
   }
 
-
-
-
-  Future<List> categoryOptions(Enum valueType) async {
+  Future <List<String>> categoryOptions(Enum valueType) async {
+    print("checking category Options");
     String isIncome = '0';
     List<Object> isIncomeList;
     switch(valueType.name){
@@ -177,14 +157,18 @@ class BudgetDatabase {
       case 'income':
         isIncome = '1';
         break;
-    };
+    }
     isIncomeList = [isIncome];
     final db = await database;
-    List categories = await db.query(
+    List<String> newCategories =[];
+    List<Map> categories = await db.query(
                                 'categories',
                                 where: '? == is_income',
                                 whereArgs: isIncomeList
                               );
-    return categories;
+    for (var row in categories) {
+      newCategories.add(row['name'] as String);
+    }
+    return newCategories;
   }
 }

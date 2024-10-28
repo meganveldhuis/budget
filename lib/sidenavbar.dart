@@ -1,3 +1,4 @@
+import 'package:budgetapp/expenses_list/bloc/expensePageBloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,10 +24,12 @@ class _MyHomePageState extends State<SideNavBar> { //underscore at beginning of 
         page = HomePage();
       case 1:
         page = SettingsPage();
-      // case 2:
-      //   page = BlocProvider<ExpensePageBloc>(
-      //               create: (_) => ExpensePageBloc(),
-      //               child: ExpensesPage());
+      case 2:
+        // page = ExpensesPage();
+        page = BlocProvider<ExpensePageBloc>(
+                    create: (context) => ExpensePageBloc(),
+                    child: ExpensesPage()
+                );
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -51,8 +54,8 @@ class _MyHomePageState extends State<SideNavBar> { //underscore at beginning of 
                       label: Text('Favourites')
                     ),
                     NavigationRailDestination(
-                      icon: Icon(Icons.plus_one), 
-                      label: Text('Entry')
+                      icon: Icon(Icons.receipt_long), 
+                      label: Text('Expenses List')
                     ),
                   ],
                   selectedIndex: selectedIndex,

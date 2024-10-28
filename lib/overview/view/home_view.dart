@@ -6,6 +6,9 @@ import '../../db/budget_database.dart';
 import '../widgets/donutChart.dart';
 // import '../my_app_state.dart';
 
+enum Dropdown {expense, income, budget}
+
+
 class HomePage extends StatelessWidget{
   
   final BudgetDatabase _databaseService = BudgetDatabase.instance;
@@ -26,6 +29,7 @@ class HomePage extends StatelessWidget{
             GestureDetector(
                 onTap: () {
                   _databaseService.printCategories();
+                  // _databaseService.categoryOptions(Dropdown.expense);
                 },
                 child: Container(
                   width: 300,
@@ -74,7 +78,7 @@ class HomePage extends StatelessWidget{
                   onPressed: () {
                     if (_task == null || _task == "") return; //don't add a null task
                     // _databaseService.addTask(_task!);
-                    _databaseService.createCategory(_task!,'this is the description',1);
+                    _databaseService.createCategory(_task!,'this is the description',0);
                     //setState(() {
                       _task = null;
                     //});
