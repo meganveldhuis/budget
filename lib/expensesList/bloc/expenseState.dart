@@ -15,7 +15,9 @@ sealed class ExpenseState{
 
 class ExpenseInitialized extends ExpenseState{
   final List<String> categories;
-  const ExpenseInitialized({required this.categories}); 
+  final List<String> yearOptions;
+  final List<String> monthOptions;
+  const ExpenseInitialized({required this.categories, required this.yearOptions, required this.monthOptions}); 
 }
 
 class ExpenseInitializing extends ExpenseState{

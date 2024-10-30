@@ -20,7 +20,7 @@
 // import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:dropdown_search/dropdown_search.dart';
 import '../bloc/expensePageBloc.dart';
 
 
@@ -32,52 +32,90 @@ class ExpensesPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: ,
-      body: Center(
-        child: 
-          BlocBuilder<ExpensePageBloc, ExpenseState>(
-            builder: (context, state) {
-              List<String> categoryStrings = [];
-              print(state);
-              if (state is ExpenseInitializing){
-                context.read<ExpensePageBloc>().add(InitExpensePage());
+      body: Container(
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Center(
+              child: 
+                BlocBuilder<ExpensePageBloc, ExpenseState>(
+                  builder: (context, state) {
+                    List<String> categoryStrings = [];
+                    print(state);
+                    if (state is ExpenseInitializing){
+                      context.read<ExpensePageBloc>().add(InitExpensePage());
+                    }
+                    if (state is ExpenseInitialized){
+                      categoryStrings = state.categories;
+                    }
+                    List<DropdownMenuEntry> categoryItems = [];
+                    for(String i in categoryStrings){ //this will give elements in the list
+                      categoryItems.add(
+                        DropdownMenuEntry(
+                          label: i,
+                          value: i
+                        )
+                      );
+                    }
+                    return DropdownMenu(
+                      label: const Text('Filter by Category'),
+                      width: 200.0,
+                      enableFilter: true,
+                      enableSearch: true,
+                      dropdownMenuEntries: categoryItems,
+                      onSelected: (dynamic chosenCategory){
+                            context.read<ExpensePageBloc>().add(CategoryDropdownPressed(chosenCategory as String));
+                      },
+                    );
+                  }
+                ),
+            ),
+            BlocBuilder<ExpensePageBloc, ExpenseState>(
+              builder: (context, state) {
+                List<String> options = [];
+                print(state);
+                if (state is ExpenseInitializing){
+                  context.read<ExpensePageBloc>().add(InitExpensePage());
+                }
+                if (state is ExpenseInitialized){
+                  options = state.yearOptions;
+                }
+                // List<String> optionItems = [];
+                // for(String i in options){ //this will give elements in the list
+                //   optionItems.add(i);
+                // }
+                return Scaffold();
+                //   DropdownSearch<String>(
+                //   items: (f,cs) => options,
+                //   // onSelected: (dynamic chosenYear){
+                //   //       context.read<ExpensePageBloc>().add(CategoryDropdownPressed(chosenYear as String));
+                //   // },
+                // );
               }
-              if (state is ExpenseInitialized){
-                categoryStrings = state.categories;
+            ),
+            BlocBuilder<ExpensePageBloc, ExpenseState>(
+              builder: (context, state) {
+                return Placeholder(color: Color.fromARGB(255, 30, 122, 220));
               }
-              List<DropdownMenuEntry> categoryItems = [];
-              for(String i in categoryStrings){ //this will give elements in the list
-                categoryItems.add(
-                  DropdownMenuEntry(
-                    label: i,
-                    value: i
-                  )
-                );
-              }
-              return DropdownMenu(
-                label: const Text('Filter by Category'),
-                width: 200.0,
-                enableFilter: true,
-                enableSearch: true,
-                dropdownMenuEntries: categoryItems,
-                onSelected: (dynamic chosenCategory){
-                      context.read<ExpensePageBloc>().add(CategoryDropdownPressed(chosenCategory as String));
-                },
-              );
-            }
-          )
-              // DropdownButton(
-              //     items: categoryItems, 
-              //     onChanged: 
-              //       (dynamic chosenCategory){
-              //         context.read<ExpensePageBloc>().add(CategoryDropdownPressed(chosenCategory as String));
-              //     },
-              //     value: state is DropdownUpdated && state.whichOneTho == DropdownButtons.category? state.chosenCategory : oldValue;
-              // );
-              // ideally we have blocbuilder around dropdownbutton so we can control a buildwhen
-              // CONTAINER with all dropdowns. separate one for table and one for each of the dropdowns 
-            
-          
+            ),
+          ],
+        ),
       )
     );
   }
 }
+
+
+
+
+  // DropdownButton(
+  //     items: categoryItems, 
+  //     onChanged: 
+  //       (dynamic chosenCategory){
+  //         context.read<ExpensePageBloc>().add(CategoryDropdownPressed(chosenCategory as String));
+  //     },
+  //     value: state is DropdownUpdated && state.whichOneTho == DropdownButtons.category? state.chosenCategory : oldValue;
+  // );
+  // ideally we have blocbuilder around dropdownbutton so we can control a buildwhen
+  // CONTAINER with all dropdowns. separate one for table and one for each of the dropdowns 
+                  
