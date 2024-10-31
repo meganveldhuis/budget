@@ -1,3 +1,6 @@
+export '../new_entry/view/newEntryView.dart';
+
+
 // NEW ENTRY (income or expense)
 
 /* 

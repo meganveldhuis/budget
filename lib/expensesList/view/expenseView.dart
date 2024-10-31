@@ -25,82 +25,92 @@ import '../bloc/expensePageBloc.dart';
 
 
 class ExpensesPage extends StatelessWidget{
+  // final theTea? tea
   ExpensesPage({super.key});
+  // final GlobalKey<DropdownMenu> _key;
   
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: ,
-      body: Container(
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
+      body: Row(
+          // mainAxisSize: MainAxisSize.max,
           children: [
-            Center(
+            Expanded(
+              child: BlocBuilder<ExpensePageBloc, ExpenseState>(
+                builder: (context, state) {
+                  List<String> categoryStrings = [];
+                  print(state);
+                  if (state is ExpenseInitializing){
+                    context.read<ExpensePageBloc>().add(InitExpensePage());
+                  }
+                  if (state is ExpenseInitialized){
+                    categoryStrings = state.categories;
+                  }
+                  List<DropdownMenuEntry> categoryItems = [];
+                  for(String i in categoryStrings){ //this will give elements in the list
+                    categoryItems.add(
+                      DropdownMenuEntry(
+                        label: i,
+                        value: i
+                      )
+                    );
+                  }
+                  return DropdownMenu(
+                    label: const Text('Filter by Category'),
+                    width: 200.0,
+                    enableFilter: true,
+                    enableSearch: true,
+                    dropdownMenuEntries: categoryItems,
+                    onSelected: (dynamic chosenCategory){
+                          context.read<ExpensePageBloc>().add(CategoryDropdownPressed(chosenCategory as String));
+                    },
+                  );
+                }
+              ),
+            ),
+            
+            Expanded(
+              // height: 200,
+              // width: 150,
               child: 
                 BlocBuilder<ExpensePageBloc, ExpenseState>(
                   builder: (context, state) {
-                    List<String> categoryStrings = [];
+                    List<String> options = [];
                     print(state);
                     if (state is ExpenseInitializing){
                       context.read<ExpensePageBloc>().add(InitExpensePage());
                     }
                     if (state is ExpenseInitialized){
-                      categoryStrings = state.categories;
+                      options = state.yearOptions;
+                      print(options);
                     }
-                    List<DropdownMenuEntry> categoryItems = [];
-                    for(String i in categoryStrings){ //this will give elements in the list
-                      categoryItems.add(
-                        DropdownMenuEntry(
-                          label: i,
-                          value: i
-                        )
+                    // List<String> optionItems = [];
+                    // for(String i in options){ //this will give elements in the list
+                    //   optionItems.add(i);
+                    // }
+                    // return Placeholder();
+                      return DropdownSearch<String>(
+                        items: (f,cs) => options,
+                      // onSelected: (dynamic chosenYear){
+                      //       context.read<ExpensePageBloc>().add(CategoryDropdownPressed(chosenYear as String)
                       );
-                    }
-                    return DropdownMenu(
-                      label: const Text('Filter by Category'),
-                      width: 200.0,
-                      enableFilter: true,
-                      enableSearch: true,
-                      dropdownMenuEntries: categoryItems,
-                      onSelected: (dynamic chosenCategory){
-                            context.read<ExpensePageBloc>().add(CategoryDropdownPressed(chosenCategory as String));
-                      },
-                    );
+                      
+                    
                   }
-                ),
+                )
             ),
-            BlocBuilder<ExpensePageBloc, ExpenseState>(
-              builder: (context, state) {
-                List<String> options = [];
-                print(state);
-                if (state is ExpenseInitializing){
-                  context.read<ExpensePageBloc>().add(InitExpensePage());
-                }
-                if (state is ExpenseInitialized){
-                  options = state.yearOptions;
-                }
-                // List<String> optionItems = [];
-                // for(String i in options){ //this will give elements in the list
-                //   optionItems.add(i);
-                // }
-                return Scaffold();
-                //   DropdownSearch<String>(
-                //   items: (f,cs) => options,
-                //   // onSelected: (dynamic chosenYear){
-                //   //       context.read<ExpensePageBloc>().add(CategoryDropdownPressed(chosenYear as String));
-                //   // },
-                // );
-              }
-            ),
-            BlocBuilder<ExpensePageBloc, ExpenseState>(
-              builder: (context, state) {
-                return Placeholder(color: Color.fromARGB(255, 30, 122, 220));
-              }
-            ),
+            // Expanded(
+            //   child: BlocBuilder<ExpensePageBloc, ExpenseState>(
+            //     builder: (context, state) {
+            //       return Placeholder(color: Color.fromARGB(255, 30, 122, 220));
+            //     }
+            //   ),
+            // ),
           ],
-        ),
-      )
+      ),
+      // floatingActionButton: FloatingActionButton(onPressed: onPressed),
     );
   }
 }

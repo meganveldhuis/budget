@@ -1,9 +1,14 @@
 import 'package:budgetapp/expensesList/bloc/expensePageBloc.dart';
+import 'package:budgetapp/new_entry/bloc/NewEntryBloc.dart';
+import 'package:budgetapp/new_entry/bloc/NewEntryCubit.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // import '../../pages/entry.dart';
-import 'settings/view/settings_view.dart';
+// import 'settings/view/settings_view.dart';
+import '/new_entry/new_entry.dart';
 import 'overview/view/homeView.dart';
 import 'expensesList/view/expenseView.dart';
 
@@ -23,7 +28,11 @@ class _MyHomePageState extends State<SideNavBar> { //underscore at beginning of 
       case 0:
         page = HomePage();
       case 1:
-        page = SettingsPage();
+        page = NewEntryView();
+        // page = BlocProvider<ToggleEntryCubit>(
+        //             create: (_) => ToggleEntryCubit(false),
+        //             child: NewEntryView()
+        //         );
       case 2:
         // page = ExpensesPage();
         page = BlocProvider<ExpensePageBloc>(
