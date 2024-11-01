@@ -28,11 +28,23 @@ class _MyHomePageState extends State<SideNavBar> { //underscore at beginning of 
       case 0:
         page = HomePage();
       case 1:
-        page = NewEntryView();
-        // page = BlocProvider<ToggleEntryCubit>(
-        //             create: (_) => ToggleEntryCubit(false),
-        //             child: NewEntryView()
-        //         );
+        // page = NewEntryView();
+        page = MultiBlocProvider(
+          providers: [
+            BlocProvider<ToggleEntryCubit>(
+                    create: (_) => ToggleEntryCubit(false)
+            ),
+            BlocProvider<DateEntryCubit>(
+              create: (_) => DateEntryCubit(DateTime.now())
+            ),
+            BlocProvider<ExpensePageBloc>(
+                  create: (context) => ExpensePageBloc()
+              ),
+            // BlocProvider(create: create)
+          ],
+          child: NewEntryView(),
+        );
+        
       case 2:
         // page = ExpensesPage();
         page = BlocProvider<ExpensePageBloc>(
@@ -77,7 +89,7 @@ class _MyHomePageState extends State<SideNavBar> { //underscore at beginning of 
               ),
             Expanded(
               child: Container(
-                color: Theme.of(context).colorScheme.primaryContainer,
+                color: Theme.of(context).colorScheme.primary,
                 child: page,
               ),
             ),

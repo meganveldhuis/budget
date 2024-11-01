@@ -9,3 +9,20 @@ class ToggleEntryCubit extends Cubit<bool>{
     print(state);
   }
 }
+
+class DateEntryCubit extends Cubit<DateTime>{
+  final DateTime chosenDate;
+  DateEntryCubit(this.chosenDate) : super(chosenDate);
+
+  void updateDate(chosenDate){
+    emit(chosenDate);
+  }
+}
+
+class ToggleTripCubit extends Cubit<bool>{
+  final bool isTrip;
+  ToggleTripCubit(this.isTrip) : super(isTrip);
+
+  void toggle(){emit(!state);}
+  // void togglet() => emit(!state);
+}

@@ -25,8 +25,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Budget App',
         theme: ThemeData(
+          fontFamily: 'Raleway',
           useMaterial3: true,
-          primarySwatch: Colors.amber,
+          brightness: Brightness.dark,
+          primarySwatch: Colors.cyan,
         ),
         home: SideNavBar(),
       )
