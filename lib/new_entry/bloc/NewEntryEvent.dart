@@ -4,7 +4,17 @@ sealed class NewEntryEvent{
   const NewEntryEvent();
 }
 
-// class InitExpensePage extends NewEntryEvent{
-//   //no inputs needed...
-//   const InitExpensePage();  
-// }
+class EntryBtnPressed extends NewEntryEvent{
+  bool isIncome = false;
+  // final ExpenseItem to = 
+  String date;
+  // String timestamp;
+  // String name;
+  // int categoryID;
+  // int tripID;
+  // Float amount;
+  // int currencyID;
+
+
+  EntryBtnPressed(this.isIncome, this.date);
+}

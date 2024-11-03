@@ -23,6 +23,6 @@ class ToggleTripCubit extends Cubit<bool>{
   final bool isTrip;
   ToggleTripCubit(this.isTrip) : super(isTrip);
 
-  void toggle(){emit(!state);}
+  void toggle(){ emit(!state); }
   // void togglet() => emit(!state);
 }

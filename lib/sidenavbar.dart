@@ -39,8 +39,10 @@ class _MyHomePageState extends State<SideNavBar> { //underscore at beginning of 
             ),
             BlocProvider<ExpensePageBloc>(
                   create: (context) => ExpensePageBloc()
-              ),
-            // BlocProvider(create: create)
+            ),
+            BlocProvider<ToggleTripCubit>(
+                  create: (context) => ToggleTripCubit(false)
+            ),
           ],
           child: NewEntryView(),
         );

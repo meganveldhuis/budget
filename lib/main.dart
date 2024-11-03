@@ -29,21 +29,10 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           brightness: Brightness.dark,
           primarySwatch: Colors.cyan,
+          
         ),
         home: SideNavBar(),
       )
     );
   }
 }
-    // MaterialApp(
-    //     title: 'Budget App',
-    //     theme: ThemeData(
-    //       useMaterial3: true,
-    //       primarySwatch: Colors.amber,
-    //     ),
-    //     home: 
-    //       RepositoryProvider(
-    //         create: (context) => 
-    //       )
-        
-    // );

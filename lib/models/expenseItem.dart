@@ -17,7 +17,7 @@ class ExpenseItem {
   String name;
   int categoryID;
   int tripID;
-  Float amount;
+  double amount;
   int currencyID;
 
   ExpenseItem({required this.date, required this.timestamp, 
